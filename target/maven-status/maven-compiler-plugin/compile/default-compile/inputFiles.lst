@@ -1,0 +1,16 @@
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\dto\StringRequest.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\repository\AdminRepository.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\controller\CollectionController.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\repository\CollectionRepository.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\dto\ContactFormDto.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\repository\ImageRepository.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\entity\Admin.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\controller\AdminController.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\dto\LoginRequestDTO.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\PhotographyPortfolioApplication.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\service\CollectionService.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\service\ImageService.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\controller\ContactController.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\service\AdminService.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\entity\Collection.java
+D:\Spring (Eclipse)\PhotographyPortfolio\src\main\java\com\Photography\entity\Image.java
