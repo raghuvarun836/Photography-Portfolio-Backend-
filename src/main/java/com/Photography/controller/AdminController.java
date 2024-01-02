@@ -42,6 +42,7 @@ public class AdminController {
     public ResponseEntity<String> logout(HttpSession session) {
         // Invalidate the session to log out the user
         session.invalidate();
+        System.out.println("Logged out");
         return ResponseEntity.ok("Logout successful");
     }
 
