@@ -25,7 +25,7 @@ public class ContactController {
             // Create a SimpleMailMessage and set its values
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setFrom("raghuvarun836@gmail.com");
-            mailMessage.setTo("raghuvarun836@gmail.com");
+            mailMessage.setTo("k.p.rajesh888@gmail.com");
             mailMessage.setSubject("New Contact Form Submission From Your Website");
             mailMessage.setText(
                 "Name: " + contactFormDto.getName() + "\n" +
