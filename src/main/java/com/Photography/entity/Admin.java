@@ -13,15 +13,18 @@ public class Admin {
     
     private String password;
     
+    private String role;
+    
 	public Admin() {
 		super();
 	}
 
-	public Admin(String id, String username, String password) {
+	public Admin(String id, String username, String password, String role) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
+		this.role = role;
 	}
 
 	public String getId() {
@@ -36,6 +39,10 @@ public class Admin {
 		return password;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
@@ -46,6 +53,10 @@ public class Admin {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override

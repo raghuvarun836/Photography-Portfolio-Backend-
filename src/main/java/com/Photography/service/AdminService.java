@@ -21,7 +21,7 @@ public class AdminService {
     private CollectionService collectionService;
 
     public boolean authenticateAdmin(String username, String password) {
-        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findByUsername(username));
+        Optional<Admin> adminOptional = adminRepository.findByUsername(username);
         return adminOptional.map(admin -> password.equals(admin.getPassword())).orElse(false);
     }
 
