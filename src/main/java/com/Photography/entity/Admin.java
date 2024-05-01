@@ -2,7 +2,9 @@ package com.Photography.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
+@Component
 @Document(collection = "admins")
 public class Admin {
 
@@ -17,6 +19,7 @@ public class Admin {
     
 	public Admin() {
 		super();
+		this.role = "ADMIN";
 	}
 
 	public Admin(String id, String username, String password, String role) {
@@ -24,7 +27,7 @@ public class Admin {
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.role = role;
+		this.role = (role != null && !role.isEmpty()) ? role : "ADMIN";
 	}
 
 	public String getId() {

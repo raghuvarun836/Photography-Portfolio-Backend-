@@ -33,7 +33,7 @@ public class CollectionService {
     }
 
     public void addCollection(String collectionName) {
-        Optional<Collection> existingCollection = collectionRepository.findByName(collectionName);
+        Optional<Collection> existingCollection = Optional.ofNullable(collectionRepository.findByName(collectionName));
         existingCollection.ifPresent(collection -> {
             throw new RuntimeException("Collection with the same name already exists");
         });

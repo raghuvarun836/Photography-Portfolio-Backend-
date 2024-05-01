@@ -1,14 +1,14 @@
 package com.Photography.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import com.Photography.entity.Collection;
 
+@Repository
 public interface CollectionRepository extends MongoRepository<Collection, String>{
 
-	Optional<Collection> findByName(String collectionName);
+	Collection findByName(String collectionName);
 
 	boolean existsByName(String collectionName);
 }

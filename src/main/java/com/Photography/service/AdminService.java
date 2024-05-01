@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Photography.entity.Admin;
@@ -19,11 +20,19 @@ public class AdminService {
 
     @Autowired
     private CollectionService collectionService;
+    
+    private BCryptPasswordEncoder encoder=new BCryptPasswordEncoder(10);
+    
+    public Admin save(Admin admin)
+	{
+    	admin.setPassword(encoder.encode(admin.getPassword()));
+		return adminRepository.save(admin);
+	}
 
-    public boolean authenticateAdmin(String username, String password) {
-        Optional<Admin> adminOptional = adminRepository.findByUsername(username);
-        return adminOptional.map(admin -> password.equals(admin.getPassword())).orElse(false);
-    }
+//    public boolean authenticateAdmin(String username, String password) {
+//        Optional<Admin> adminOptional = Optional.ofNullable(adminRepository.findByUsername(username));
+//        return adminOptional.map(admin -> encoder.matches(password, admin.getPassword())).orElse(false);
+//    }
 
     public void addCollection(String collectionName) {
         collectionService.addCollection(collectionName);

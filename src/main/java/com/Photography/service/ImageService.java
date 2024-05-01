@@ -15,7 +15,7 @@ public class ImageService {
     private ImageRepository imageRepository;
 
     public Optional<Image> getImageByImageUrl(String imageUrl) {
-        return imageRepository.findByImageUrl(imageUrl);
+        return Optional.ofNullable(imageRepository.findByImageUrl(imageUrl));
     }
     
     public boolean imageExists(String imageUrl) {
