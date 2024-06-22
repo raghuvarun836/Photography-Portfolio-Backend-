@@ -1,3 +1,4 @@
+com\Photography\service\MyUserDetailsService.class
 com\Photography\entity\Collection.class
 com\Photography\service\CollectionService.class
 com\Photography\dto\StringRequest.class
@@ -5,12 +6,16 @@ com\Photography\repository\AdminRepository.class
 com\Photography\dto\ContactFormDto.class
 com\Photography\service\ImageService.class
 com\Photography\dto\LoginRequestDTO.class
+com\Photography\service\AdminJWTService.class
+com\Photography\config\JwtFilter.class
 com\Photography\controller\AdminController.class
 com\Photography\PhotographyPortfolioApplication.class
 com\Photography\service\AdminService.class
 com\Photography\controller\CollectionController.class
 com\Photography\entity\Admin.class
 com\Photography\repository\CollectionRepository.class
+com\Photography\config\SecurityConfig.class
 com\Photography\controller\ContactController.class
 com\Photography\repository\ImageRepository.class
+com\Photography\entity\MyUserDetails.class
 com\Photography\entity\Image.class

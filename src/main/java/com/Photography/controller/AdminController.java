@@ -1,5 +1,6 @@
 package com.Photography.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,6 @@ import com.Photography.entity.Image;
 import com.Photography.service.AdminJWTService;
 import com.Photography.service.AdminService;
 
-import jakarta.servlet.http.HttpSession;
-
 @RestController
 @RequestMapping("/api/admin")
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -34,41 +33,28 @@ public class AdminController {
     private AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
-    public Admin registerAdmin(@RequestBody Admin admin)
-    {
-        return adminService.save(admin);
+    public ResponseEntity<Admin> registerAdmin(@RequestBody Admin admin) {
+        Admin savedAdmin = adminService.save(admin);
+        return ResponseEntity.ok(savedAdmin);
     }
     
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody Admin admin)
     {
+    	System.out.println("Received login request");
     	Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(admin.getUsername(), admin.getPassword()));
-    	String s=(String) adminJWTService.generateToken(admin.getUsername());
-    	return auth.isAuthenticated() ? ResponseEntity.ok(s) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password") ;
-    	//return auth.isAuthenticated() ? ResponseEntity.ok("Login successful") : ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password") ;
+    	if (auth.isAuthenticated()) {
+            String token = adminJWTService.generateToken(admin.getUsername());
+            adminService.updateTokenInvalidationTime(admin.getUsername(), LocalDateTime.now().plusHours(1));
+            return ResponseEntity.ok(token);
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
     }
     
-//    @PostMapping("/login")
-//    public ResponseEntity<String> login(@RequestBody Admin admin) {
-//        String username = admin.getUsername();
-//        String password = admin.getPassword();
-//
-//        System.out.println("Received login request for username: " + username);
-//
-//        if (adminService.authenticateAdmin(username, password)) {
-//        	System.out.println("Successfully logged into: "+username);
-//            return ResponseEntity.ok("Login successful");
-//        } else {
-//            System.out.println("Authentication failed for username: " + username);
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid username or password");
-//        }
-//    }
-
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(HttpSession session) {
-        // Invalidate the session to log out the user
-        session.invalidate();
-        System.out.println("Logged out");
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String token) {
+        String username = adminJWTService.extractUserName(token.substring(7));
+        adminService.updateTokenInvalidationTime(username, LocalDateTime.now().minusHours(1));
         return ResponseEntity.ok("Logout successful");
     }
 

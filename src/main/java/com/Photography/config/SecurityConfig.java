@@ -26,16 +26,6 @@ public class SecurityConfig {
     @Autowired
 	private JwtFilter jwtFilter;
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.csrf().disable()
-//                .authorizeHttpRequests()
-//                .requestMatchers("/api/collections/**", "/api/contact/**").permitAll()
-//                .and()
-//                .authorizeHttpRequests().requestMatchers("/api/admin/**")
-//                .authenticated().and().formLogin().and().build();
-//    }
-
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception
     {

@@ -1,5 +1,7 @@
 package com.Photography.entity;
 
+import java.time.LocalDateTime;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
@@ -17,17 +19,20 @@ public class Admin {
     
     private String role;
     
+    private LocalDateTime tokenInvalidationTime;
+    
 	public Admin() {
 		super();
 		this.role = "ADMIN";
 	}
 
-	public Admin(String id, String username, String password, String role) {
+	public Admin(String id, String username, String password, String role, LocalDateTime tokenInvalidationTime) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.role = (role != null && !role.isEmpty()) ? role : "ADMIN";
+		this.tokenInvalidationTime = tokenInvalidationTime;
 	}
 
 	public String getId() {
@@ -61,10 +66,21 @@ public class Admin {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+
+	public LocalDateTime getTokenInvalidationTime() {
+		return tokenInvalidationTime;
+	}
+
+	public void setTokenInvalidationTime(LocalDateTime tokenInvalidationTime) {
+		this.tokenInvalidationTime = tokenInvalidationTime;
+	}
 
 	@Override
 	public String toString() {
-		return "Admin [id=" + id + ", username=" + username + ", password=" + password + "]";
+		return "Admin [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role
+				+ ", tokenInvalidationTime=" + tokenInvalidationTime + "]";
 	}
+
 }
 

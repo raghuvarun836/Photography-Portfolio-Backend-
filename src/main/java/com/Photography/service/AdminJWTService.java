@@ -1,11 +1,14 @@
 package com.Photography.service;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.*;
 import java.util.function.Function;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,9 @@ public class AdminJWTService
 {
 	
 	private String secretKey;
+	
+	 @Autowired
+	 private AdminService adminService;
 	
 	public AdminJWTService()
 	{
@@ -34,7 +40,7 @@ public class AdminJWTService
                 .claims(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 10))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
                 .signWith(getKey(), Jwts.SIG.HS256)
                 .compact();
 	}
@@ -77,8 +83,15 @@ public class AdminJWTService
 
 
     public boolean validateToken(String token, UserDetails userDetails) {
-        final String userName = extractUserName(token);
-        return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        final String username = extractUserName(token);
+        final LocalDateTime tokenInvalidationTime = adminService.getTokenInvalidationTime(username);
+        if (tokenInvalidationTime == null) {
+            return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+        }
+        Date tokenInvalidationDate = convertToDate(tokenInvalidationTime);
+        return (username.equals(userDetails.getUsername()) 
+                && !isTokenExpired(token)
+                && extractIssuedAt(token).before(tokenInvalidationDate));
     }
 
     private boolean isTokenExpired(String token) {
@@ -87,6 +100,14 @@ public class AdminJWTService
 
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
+    }
+    
+    private Date extractIssuedAt(String token) {
+        return extractClaim(token, Claims::getIssuedAt);
+    }
+    
+    private Date convertToDate(LocalDateTime localDateTime) {
+        return localDateTime == null ? null : Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
 }
