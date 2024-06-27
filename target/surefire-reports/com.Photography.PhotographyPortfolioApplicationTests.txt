@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.Photography.PhotographyPortfolioApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.371 s -- in com.Photography.PhotographyPortfolioApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.24 s -- in com.Photography.PhotographyPortfolioApplicationTests
